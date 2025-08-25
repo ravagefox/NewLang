@@ -1493,12 +1493,12 @@ class Executor(CompilerComponent):
         self.type_methods: Dict[str, Dict[str, ExtendMethod]] = {}
     
     def create_runtime(self) -> Dict:
-        """Create the runtime environment."""
-        return {
-            ('std','print'): lambda s: print(s, end=''),
-            ('std','println'): lambda s: print(s),
-            ('std','toArray'): lambda s: list(s),
-        }
+        try:
+            from runtime import createRuntimeStd
+        except ImportError:
+            from .runtime import createRuntimeStd
+            
+        return createRuntimeStd()
     
     def execute(self, program: Program):
         """Execute the program."""
