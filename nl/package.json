@@ -1,0 +1,25 @@
+{
+  "name": "nl",
+  "displayName": "NL",
+  "description": "Language for embedded systems",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "nl",
+      "aliases": ["nl", "nl"],
+      "extensions": [".nl"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "nl",
+      "scopeName": "source.nl",
+      "path": "./syntaxes/nl.tmLanguage.json"
+    }]
+  }
+}

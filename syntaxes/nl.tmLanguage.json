@@ -1,0 +1,109 @@
+{
+  "scopeName": "source.nl",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#types" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#structBody" },
+    { "include": "#typedVariables" },
+    { "include": "#memberAccess" }
+
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        { "name": "comment.line.double-slash.nl", "match": "//.*$" },
+        { "name": "comment.block.nl", "begin": "/\\*", "end": "\\*/" }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.nl",
+          "match": "\\b(while|for|base|from|into|in|declare|def|extend|type|struct|auto|const|finalize|ptr|private|__main__|new|import|as)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.nl",
+          "match": "\\b(this|int|double|char|bool|void|array)\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.nl",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            { "name": "constant.character.escape.nl", "match": "\\\\." }
+          ]
+        },
+        {
+          "name": "string.quoted.curly.nl",
+          "begin": "“",
+          "end": "”"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        { "name": "constant.numeric.nl", "match": "\\b\\d+(\\.\\d+)?\\b" }
+      ]
+    },
+    "structBody": {
+      "name": "meta.struct.nl",
+      "begin": "\\btype\\s+struct\\b\\s*\\{",
+      "end": "\\}",
+      "patterns": [
+        { "include": "#comments" },
+        { "include": "#strings" },
+        {
+          "name": "meta.struct.field.nl",
+          "match": "\\b(?:const\\s+)?(?:ptr<\\w+>|array<\\w+>|\\w+)\\s+(\\w+)\\s*(?==|;)",
+          "captures": {
+            "1": { "name": "variable.other.member.nl" }
+          }
+        }
+      ]
+    },
+    "typedVariables": {
+      "patterns": [
+        {
+          "name": "meta.variable.typed.ctor.nl",
+          "match": "\\b(\\w+)\\b\\s+(\\w+)\\s*\\(",
+          "captures": {
+            "1": { "name": "storage.type.user.nl" },
+            "2": { "name": "variable.other.object.nl" }
+          }
+        },
+        {
+          "name": "meta.variable.typed.assign.nl",
+          "match": "\\b(\\w+)\\b\\s+(\\w+)\\s*=",
+          "captures": {
+            "1": { "name": "storage.type.user.nl" },
+            "2": { "name": "variable.other.readwrite.nl" }
+          }
+        }
+      ]
+    },
+    "memberAccess": {
+      "patterns": [
+        {
+          "name": "meta.member.access.nl",
+          "match": "\\b(\\w+)\\s*->\\s*(\\w+)",
+          "captures": {
+            "1": { "name": "variable.other.object.nl" },
+            "2": { "name": "variable.other.member.nl" }
+          }
+        }
+      ]
+    }
+
+  }
+}
