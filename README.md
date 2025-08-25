@@ -308,4 +308,4 @@ NEWLANG/
 
 ## License
 
-MIT (or your preferred license—update this section accordingly).
+MIT.
